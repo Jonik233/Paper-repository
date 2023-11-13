@@ -1,0 +1,25 @@
+body {
+    background-color: white;
+    color: black;
+  }
+  
+  /* Dark theme styles */
+  body.dark-mode {
+    background-color: #121212;
+    color: white;
+  }
+  
+  .dark-mode .nav-link {
+    color: #ddd;
+  }
+  
+  .dark-mode .btn-outline-primary {
+    border-color: #ddd;
+    color: #ddd;
+  }
+  
+  .dark-mode .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
