@@ -2,9 +2,10 @@ from django.db import models
 
 class Articles(models.Model):
     title = models.CharField('Title', max_length=500)
-    author = models.CharField('Author', max_length=255)
+    authors = models.CharField('Authors', max_length=500)
     content = models.TextField('Content')
     rating_points = models.IntegerField()
+    publication_date = models.DateField(auto_now_add=True)
     
     CATEGORY_CHOICES = [
         ("physics", "Physics"), 
@@ -19,3 +20,7 @@ class Articles(models.Model):
     
     def __str__(self):
         return self.title
+    
+    class Meta:
+        verbose_name = "Article"
+        verbose_name_plural = "Articles"
