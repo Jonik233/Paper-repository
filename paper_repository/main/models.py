@@ -11,7 +11,6 @@ class Articles(models.Model):
         ("physics", "Physics"), 
         ("chemistry", "Chemistry"),
         ("economics", "Economics"),
-        ("history", "History"),
         ("math", "Math"),
         ("biology", "Biology"),
         ("machine learning", "Machine Learning")

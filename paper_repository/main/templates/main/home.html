@@ -1,8 +1,10 @@
 {% extends 'main/base.html'%}
+{% load static %}
 {% block title %}Home{% endblock %}
+
 {% block content %}
   <div class="text-center card-like shadow p-5 mb-5 mx-5 bg-body rounded">
-    <img class="d-block mx-auto mb-4" src="static/archive.svg" alt="" width="72" height="57">
+    <img class="d-block mx-auto mb-4" src="static/icons/archive.svg" alt="" width="72" height="57">
     <h1 class="display-5 fw-bold text-body-emphasis">Paper archive</h1>
     <div class="col-lg-6 mx-auto">
       <p class="lead mb-4">Welcome to Paper Archive, an innovative platform designed for academics, researchers, students, and knowledge enthusiasts. Our website serves as a comprehensive repository of academic papers, research articles, and scholarly publications across various disciplines. </p>
@@ -16,87 +18,18 @@
   <h2 class="display-5 my-4 fw-bold text-center">Best papers in the field</h2>
   <hr>
 
-  <div class="text-center card-like shadow p-5 mb-5 mx-5 my-5 bg-body rounded">
-    <img class="d-block mx-auto mb-4" src="static/lightning-charge.svg" alt="" width="72" height="57">
-    <h2 class="display-5 fw-bold text-body-emphasis">Physics</h2>
-    <div class="col-lg-6 my-3 mx-auto">
-      <h5>"Best practices for portfolio optimization by quantum computing, experimented on real quantum devices"</h5>
-      <p class="lead mb-3">By Giuseppe Buonaiuto, Francesco Gargiulo & Marco Pota</p>
-      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <button type="button" class="btn btn-primary btn-lg px-4 mt-3 gap-3">Read</button>
+  {% for article in articles %}
+    <div class="text-center card-like shadow p-5 mb-5 mx-5 my-5 bg-body rounded">
+      <img class="d-block mx-auto mb-4" src="{% static 'icons/'|add:article.field|add:'.svg' %}" alt="{{ article.field|capfirst }}" width="72" height="57">
+      <h2 class="display-5 fw-bold text-body-emphasis">{{ article.field|capfirst }}</h2>
+      <div class="col-lg-6 my-3 mx-auto">
+        <h5>"{{ article.title }}"</h5>
+        <p class="lead mb-3">By {{ article.authors }}</p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+          <button type="button" class="btn btn-primary btn-lg px-4 mt-3 gap-3">Read</button>
+        </div>
       </div>
     </div>
-  </div>
+  {% endfor %}
 
-  <div class="text-center card-like shadow p-5 mb-5 mx-5 my-5 bg-body rounded">
-    <img class="d-block mx-auto mb-4" src="static/calculator.svg" alt="" width="72" height="57">
-    <h1 class="display-5 fw-bold text-body-emphasis">Math</h1>
-    <div class="col-lg-6 mx-auto">
-      <p class="lead mb-4">Welcome to Paper Archive, an innovative platform designed for academics, researchers, students, and knowledge enthusiasts. Our website serves as a comprehensive repository of academic papers, research articles, and scholarly publications across various disciplines. </p>
-      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <button type="button" class="btn btn-primary btn-lg px-4 gap-3" style="margin-right: 10px;">Search</button>
-        <button type="button" class="btn btn-outline-secondary btn-lg px-4">Registration</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="text-center card-like shadow p-5 mb-5 mx-5 my-5 bg-body rounded">
-    <img class="d-block mx-auto mb-4" src="static/droplet.svg" alt="" width="72" height="57">
-    <h1 class="display-5 fw-bold text-body-emphasis">Biology</h1>
-    <div class="col-lg-6 mx-auto">
-      <p class="lead mb-4">Welcome to Paper Archive, an innovative platform designed for academics, researchers, students, and knowledge enthusiasts. Our website serves as a comprehensive repository of academic papers, research articles, and scholarly publications across various disciplines. </p>
-      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <button type="button" class="btn btn-primary btn-lg px-4 gap-3" style="margin-right: 10px;">Search</button>
-        <button type="button" class="btn btn-outline-secondary btn-lg px-4">Registration</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="text-center card-like shadow p-5 mb-5 mx-5 my-5 bg-body rounded">
-    <img class="d-block mx-auto mb-4" src="static/gem.svg" alt="" width="72" height="57">
-    <h1 class="display-5 fw-bold text-body-emphasis">Chemistry</h1>
-    <div class="col-lg-6 mx-auto">
-      <p class="lead mb-4">Welcome to Paper Archive, an innovative platform designed for academics, researchers, students, and knowledge enthusiasts. Our website serves as a comprehensive repository of academic papers, research articles, and scholarly publications across various disciplines. </p>
-      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <button type="button" class="btn btn-primary btn-lg px-4 gap-3" style="margin-right: 10px;">Search</button>
-        <button type="button" class="btn btn-outline-secondary btn-lg px-4">Registration</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="text-center card-like shadow p-5 mb-5 mx-5 my-5 bg-body rounded">
-    <img class="d-block mx-auto mb-4" src="static/robot.svg" alt="" width="72" height="57">
-    <h1 class="display-5 fw-bold text-body-emphasis">Machine Learning</h1>
-    <div class="col-lg-6 mx-auto">
-      <p class="lead mb-4">Welcome to Paper Archive, an innovative platform designed for academics, researchers, students, and knowledge enthusiasts. Our website serves as a comprehensive repository of academic papers, research articles, and scholarly publications across various disciplines. </p>
-      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <button type="button" class="btn btn-primary btn-lg px-4 gap-3" style="margin-right: 10px;">Search</button>
-        <button type="button" class="btn btn-outline-secondary btn-lg px-4">Registration</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="text-center card-like shadow p-5 mb-5 mx-5 my-5 bg-body rounded">
-    <img class="d-block mx-auto mb-4" src="static/book.svg" alt="" width="72" height="57">
-    <h1 class="display-5 fw-bold text-body-emphasis">History</h1>
-    <div class="col-lg-6 mx-auto">
-      <p class="lead mb-4">Welcome to Paper Archive, an innovative platform designed for academics, researchers, students, and knowledge enthusiasts. Our website serves as a comprehensive repository of academic papers, research articles, and scholarly publications across various disciplines. </p>
-      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <button type="button" class="btn btn-primary btn-lg px-4 gap-3" style="margin-right: 10px;">Search</button>
-        <button type="button" class="btn btn-outline-secondary btn-lg px-4">Registration</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="text-center card-like shadow p-5 mb-5 mx-5 my-5 bg-body rounded">
-    <img class="d-block mx-auto mb-4" src="static/graph-up-arrow.svg" alt="" width="72" height="57">
-    <h1 class="display-5 fw-bold text-body-emphasis">Economics</h1>
-    <div class="col-lg-6 mx-auto">
-      <p class="lead mb-4">Welcome to Paper Archive, an innovative platform designed for academics, researchers, students, and knowledge enthusiasts. Our website serves as a comprehensive repository of academic papers, research articles, and scholarly publications across various disciplines. </p>
-      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <button type="button" class="btn btn-primary btn-lg px-4 gap-3" style="margin-right: 10px;">Search</button>
-        <button type="button" class="btn btn-outline-secondary btn-lg px-4">Registration</button>
-      </div>
-    </div>
-  </div>
 {% endblock %}
