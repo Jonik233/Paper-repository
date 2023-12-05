@@ -17,3 +17,8 @@ def home(request):
 
 def rates(request):
     return render(request, 'main/rates.html')
+
+
+def rates_by_score(request, field):
+    articles = Articles.objects.filter(field=field).order_by('-rating_points')
+    return render(request, 'main/score_rates.html', {'articles': articles})

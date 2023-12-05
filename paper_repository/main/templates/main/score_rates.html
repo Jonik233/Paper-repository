@@ -1,0 +1,28 @@
+{% extends 'main/base.html'%}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+      {% for article in articles %}
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card mb-4 rounded-3 shadow-sm">
+          <div class="card-header py-3">
+            <!-- You can dynamically set the icon based on the article's field -->
+            <img class="d-block mx-auto mb-2" src="{% static 'icons/'|add:article.field|add:'.svg' %}" width="50" height="50" alt="{{ article.field|title }}">
+          </div>
+          <div class="card-body">
+            <h2 class="card-title text-center">{{ article.title }}</h2>
+            <p class="text-center">{{ article.authors }}</p>
+            <p>{{ article.content|truncatewords:30 }}</p> <!-- Truncate content to show only first 30 words -->
+            <!-- Add other article details you want to display -->
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <p>No articles found.</p>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
