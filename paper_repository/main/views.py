@@ -13,3 +13,7 @@ def home(request):
             top_articles.append(top_article)
                        
     return render(request, 'main/home.html', {"articles": top_articles})
+
+
+def rates(request):
+    return render(request, 'main/rates.html')
