@@ -2,99 +2,142 @@
 {% load static %}
 
 {% block head %}
-    <style>
-        .custom-dropdown {
-            position: relative;
-            display: inline-block;
-        }
+<style>
+    /* Input group with consistent margin for append/prepend elements */
+    .input-group .input-group-append,
+    .input-group .input-group-prepend {
+        margin-left: 8px; /* This sets the margin to the left of the button or prepended element */
+    }
 
-        .custom-dropdown-menu {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-        }
+    /* Ensures the dropdown doesn't shrink and has a consistent margin */
+    .custom-dropdown {
+        flex-shrink: 0; 
+        margin-left: 8px; /* This sets the margin to the left of the dropdown */
+    }
 
-        .custom-dropdown-menu a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
+    /* Styles for the dropdown menu */
+    .custom-dropdown-menu {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
 
-        .custom-dropdown-menu a:hover {
-            background-color: #f1f1f1;
-        }
+    .custom-dropdown-menu a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
 
-        .custom-dropdown:hover .custom-dropdown-menu {
-            display: block;
-        }
+    .custom-dropdown-menu a:hover {
+        background-color: #f1f1f1;
+    }
 
-        .custom-dropdown:hover .dropbtn {
-            background-color: #3e8e41;
-        }
+    .custom-dropdown:hover .custom-dropdown-menu {
+        display: block;
+    }
 
-        .input-group-text {
-            background-image: url("{% static 'icons/search.svg' %}");
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: 80%;
-            border-radius: 0rem;
-            align-items: center;
-            display: flex;
-            justify-content: center;
-            width: 2.375rem;
-        }
+    .custom-dropdown:hover .dropbtn {
+        background-color: #3e8e41;
+    }
 
-        .input-group .form-control {
-            border-radius: .375rem;
-        }
+    /* Styles for the search icon */
+    .input-group-text {
+        background-image: url("{% static 'icons/search.svg' %}");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 80%;
+        border-radius: 0rem;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        width: 2.375rem;
+    }
 
-        .input-group .form-control:not(:last-child) {
-            padding-left: 2.375rem;
-        }
-    </style>
+    /* Rounded corners for the form control elements */
+    .input-group .form-control {
+        border-radius: .375rem;
+    }
+
+    /* Ensures the form control elements take up the available space */
+    .input-group>.form-control, .input-group>.custom-select, .input-group>.custom-file {
+        position: relative;
+        flex: 1 1 auto;
+        width: 1%;
+        margin-bottom: 0;
+    }
+
+    /* Ensures the 'Filter by author' input takes all available space */
+    .flex-grow-1 {
+        flex: 1;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
 <div class="container mt-3">
     <div class="row justify-content-center">
-      <div class="col-lg-8">
-        <div class="card shadow rounded-lg">
-          <div class="card-header text-center">
-            <h3>Search</h3>
-          </div>
-          <div class="card-body">
-            
-            <!-- Search Field and Button -->
-            <div class="row justify-content-center mb-3">
-              <div class="col-md-8">
-                <div class="input-group">
-                  <span class="input-group-text" id="search-addon"></span>
-                  <input type="text" class="form-control" placeholder="Search for papers" aria-label="Search for papers" aria-describedby="search-addon">
-                  <button type="button" class="btn btn-danger" style="margin-left: 8px; width: 120px;">Search</button>
+        <div class="col-lg-8">
+            <div class="card shadow rounded-lg">
+                <div class="card-header text-center">
+                    <h3>Search</h3>
                 </div>
-              </div>
-            </div>
+                <div class="card-body">
+                    <!-- Search Field and Button -->
+                    <div class="row justify-content-center mb-3">
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <span class="input-group-text" id="search-addon"></span>
+                                <input type="text" class="form-control" placeholder="Search for papers" aria-label="Search for papers" aria-describedby="search-addon">
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-danger">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-            <!-- Author Field and Fields Dropdown -->
-            <div class="row justify-content-center">
-              <div class="col-md-8">
-                <div class="d-flex">
-                  <div class="flex-grow-1 me-3 mx-2">
-                    <input type="text" class="form-control" placeholder="Filter by author" aria-label="Filter by author">
-                  </div>
-                  <div>
-                    <button class="btn btn-primary dropbtn" style="width: 120px;">Fields</button>
-                  </div>
+                    <!-- Author Field and Fields Dropdown -->
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="d-flex">
+                                <input type="text" class="form-control flex-grow-1" placeholder="Filter by author" aria-label="Filter by author">
+                                <div class="custom-dropdown">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Field
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">All</a>
+                                        <a class="dropdown-item" href="#">Physics</a>
+                                        <a class="dropdown-item" href="#">Math</a>
+                                        <a class="dropdown-item" href="#">Machine Learning</a>
+                                        <a class="dropdown-item" href="#">Chemistry</a>
+                                        <a class="dropdown-item" href="#">Biology</a>
+                                        <a class="dropdown-item" href="#">Economics</a>
+                                    </div>
+                                </div>
+                                <!-- Hidden field to store the selected dropdown value -->
+                                <input type="hidden" id="selectedField" name="selected_field" value="">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>                            
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script>
+    // jQuery to handle dropdown item click event
+    $(document).ready(function(){
+        $('.dropdown-menu a').click(function(e){
+            e.preventDefault(); // Prevent the link from navigating.
+            var selText = $(this).text();
+            $('#dropdownMenuButton').text(selText); // Change button text
+            $('#selectedField').val(selText); // Change hidden input value
+        });
+    });
+</script>
 {% endblock %}
