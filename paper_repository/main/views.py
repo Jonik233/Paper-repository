@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Articles
 from django.db.models import Max
+from django.http import HttpResponseNotFound
 
 def home(request):
     max_ratings = Articles.objects.values('field').annotate(max_rating=Max('rating_points'))
@@ -19,6 +20,14 @@ def rates(request):
     return render(request, 'main/rates.html')
 
 
-def rates_by_score(request, field):
-    articles = Articles.objects.filter(field=field).order_by('-rating_points')
-    return render(request, 'main/score_rates.html', {'articles': articles})
+def rates_by_criteria(request, field, sort_by):
+    if sort_by == 'score':
+        articles = Articles.objects.filter(field=field).order_by('-rating_points')
+        template = 'main/score_rates.html'
+    elif sort_by == 'date':
+        articles = Articles.objects.filter(field=field).order_by('-publication_date')
+        template = 'main/date_rates.html'
+    else:
+        return HttpResponseNotFound('<h1>Page not found</h1>')
+
+    return render(request, template, {'articles': articles})
