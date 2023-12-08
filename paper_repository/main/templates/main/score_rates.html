@@ -16,7 +16,7 @@
                 <div class="d-flex border rounded overflow-hidden mb-3 shadow" style="min-height: 150px;">
                     <div class="p-4 d-flex flex-column justify-content-between" style="background-color: #f8f9fa; border-right: 2px solid #dee2e6; width: 25%;">
                         <div class="text-center" style="font-size: 1.8rem;">#{{ forloop.counter }}</div>
-                        <a href="#" class="btn btn-primary w-100">Read</a>
+                        <a href="{% url 'article' article.id %}" class="btn btn-primary w-100">Read</a>
                     </div>
                     <div class="p-5 d-flex flex-column justify-content-between" style="width: 75%;">
                         <div>

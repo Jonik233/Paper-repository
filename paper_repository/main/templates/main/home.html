@@ -27,7 +27,7 @@
         <h5>"{{ article.title }}"</h5>
         <p class="lead mb-3">By {{ article.authors }}</p>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-          <button type="button" class="btn btn-primary btn-lg px-4 mt-3 gap-3">Read</button>
+          <a href="{% url 'article' article.id %}" class="btn btn-primary btn-lg px-4 mt-3 gap-3">Read</a>
         </div>
       </div>
     </div>

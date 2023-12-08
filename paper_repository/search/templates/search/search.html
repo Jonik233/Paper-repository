@@ -3,19 +3,16 @@
 
 {% block head %}
 <style>
-    /* Input group with consistent margin for append/prepend elements */
     .input-group .input-group-append,
     .input-group .input-group-prepend {
-        margin-left: 8px; /* This sets the margin to the left of the button or prepended element */
+        margin-left: 8px;
     }
 
-    /* Ensures the dropdown doesn't shrink and has a consistent margin */
     .custom-dropdown {
         flex-shrink: 0; 
-        margin-left: 8px; /* This sets the margin to the left of the dropdown */
+        margin-left: 8px;
     }
 
-    /* Styles for the dropdown menu */
     .custom-dropdown-menu {
         display: none;
         position: absolute;
@@ -44,7 +41,6 @@
         background-color: #3e8e41;
     }
 
-    /* Styles for the search icon */
     .input-group-text {
         background-image: url("{% static 'icons/search.svg' %}");
         background-repeat: no-repeat;
@@ -57,12 +53,10 @@
         width: 2.375rem;
     }
 
-    /* Rounded corners for the form control elements */
     .input-group .form-control {
         border-radius: .375rem;
     }
 
-    /* Ensures the form control elements take up the available space */
     .input-group>.form-control, .input-group>.custom-select, .input-group>.custom-file {
         position: relative;
         flex: 1 1 auto;
@@ -70,7 +64,6 @@
         margin-bottom: 0;
     }
 
-    /* Ensures the 'Filter by author' input takes all available space */
     .flex-grow-1 {
         flex: 1;
     }
@@ -86,7 +79,6 @@
                     <h3>Search</h3>
                 </div>
                 <div class="card-body">
-                    <!-- Search Field and Button -->
                     <div class="row justify-content-center mb-3">
                         <div class="col-md-8">
                             <div class="input-group">
@@ -99,7 +91,6 @@
                         </div>
                     </div>
 
-                    <!-- Author Field and Fields Dropdown -->
                     <div class="row justify-content-center">
                         <div class="col-md-8">
                             <div class="d-flex">
@@ -118,7 +109,6 @@
                                         <a class="dropdown-item" href="#">Economics</a>
                                     </div>
                                 </div>
-                                <!-- Hidden field to store the selected dropdown value -->
                                 <input type="hidden" id="selectedField" name="selected_field" value="">
                             </div>
                         </div>
@@ -130,13 +120,12 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script>
-    // jQuery to handle dropdown item click event
     $(document).ready(function(){
         $('.dropdown-menu a').click(function(e){
-            e.preventDefault(); // Prevent the link from navigating.
+            e.preventDefault();
             var selText = $(this).text();
-            $('#dropdownMenuButton').text(selText); // Change button text
-            $('#selectedField').val(selText); // Change hidden input value
+            $('#dropdownMenuButton').text(selText);
+            $('#selectedField').val(selText);
         });
     });
 </script>
