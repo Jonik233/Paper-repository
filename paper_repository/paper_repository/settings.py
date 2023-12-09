@@ -63,8 +63,9 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
+                'django.template.context_processors.media',
                 'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+                'django.contrib.messages.context_processors.messages'
             ],
         },
     },
@@ -124,6 +125,8 @@ STATICFILES_DIRS = [
     BASE_DIR / "main" / "static",
 ]
 
+MEDIA_ROOT = BASE_DIR / "papers"
+MEDIA_URL = '/papers/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

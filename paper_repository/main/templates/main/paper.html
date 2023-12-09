@@ -11,9 +11,9 @@
                     <h5 class="card-title">{{ article.title }}</h5>
                     <hr>
                     <h6 class="card-subtitle mb-2 text-muted">{{ article.authors }}</h6>
-                    <p class="card-text">{{ article.content | truncatewords:30 }}</p>
+                    <p class="card-text">{{ article.content }}</p>
                     <hr>
-                    <a href="#" class="btn btn-primary">Download PDF</a>
+                    <a href="{{ article.pdf_file.url }}" class="btn btn-primary" download>Download PDF</a>
                 </div>
             </div>
         </div>

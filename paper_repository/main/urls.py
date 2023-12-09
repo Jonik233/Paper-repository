@@ -1,7 +1,9 @@
-from django.urls import path
 from . import views
-import registration.views
 import search.views
+import registration.views
+from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -11,4 +13,4 @@ urlpatterns = [
     path('rates/', views.rates, name='rates'),
     path('rates/<str:field>/<str:sort_by>/', views.get_rates_by_criteria, name='rates_by_criteria'),
     path('article/<int:id>/', views.get_article_by_id, name='article')
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -5,7 +5,8 @@ class Articles(models.Model):
     authors = models.CharField('Authors', max_length=500)
     content = models.TextField('Content')
     rating_points = models.IntegerField()
-    publication_date = models.DateField(auto_now_add=True)
+    publication_date = models.DateField(auto_now_add=False)
+    pdf_file = models.FileField(upload_to='papers/')
     
     CATEGORY_CHOICES = [
         ("physics", "Physics"), 
