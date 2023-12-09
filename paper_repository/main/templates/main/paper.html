@@ -1,4 +1,4 @@
-{% extends 'main/base.html'%}
+{% extends 'main/base.html' %}
 {% load static %}
 {% block title %}Paper{% endblock %}
 
@@ -6,11 +6,12 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-12">
-            <div class="card shadow-lg rounded-lg">
+            <div class="card shadow-lg rounded-lg p-4">
                 <div class="card-body">
-                    <h5 class="card-title">{{ article.title }}</h5>
-                    <hr>
+                    <h4 class="card-title">{{ article.title }}</h4>
                     <h6 class="card-subtitle mb-2 text-muted">{{ article.authors }}</h6>
+                    <hr>
+                    <h5>Abstract:</h5>
                     <p class="card-text">{{ article.content }}</p>
                     <hr>
                     <a href="{{ article.pdf_file.url }}" class="btn btn-primary" download>Download PDF</a>
