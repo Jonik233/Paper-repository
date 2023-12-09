@@ -3,5 +3,20 @@
 {% block title %}Paper{% endblock %}
 
 {% block content %}
-    
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow-lg rounded-lg">
+                <div class="card-body">
+                    <h5 class="card-title">{{ article.title }}</h5>
+                    <hr>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ article.authors }}</h6>
+                    <p class="card-text">{{ article.content | truncatewords:30 }}</p>
+                    <hr>
+                    <a href="#" class="btn btn-primary">Download PDF</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
