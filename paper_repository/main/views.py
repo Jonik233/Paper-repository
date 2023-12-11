@@ -21,6 +21,10 @@ def rates(request):
     return render(request, 'main/rates.html')
 
 
+def submit(request):
+    return render(request, 'main/submit.html')
+
+
 def get_rates_by_criteria(request, field, sort_by):
     if sort_by == 'score':
         articles = Articles.objects.filter(field=field).order_by('-rating_points')
@@ -32,6 +36,7 @@ def get_rates_by_criteria(request, field, sort_by):
         return HttpResponseNotFound('<h1>Page not found</h1>')
 
     return render(request, template, {'articles': articles})
+
 
 def get_article_by_id(request, id):
     article = get_object_or_404(Articles, id=id)

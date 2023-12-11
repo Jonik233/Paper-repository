@@ -10,6 +10,7 @@ urlpatterns = [
     path('registration/', registration.views.registration, name='registration'),
     path('login/', registration.views.login, name='login'),
     path('search/', search.views.search, name='search'),
+    path('submit/', views.submit, name='submit'),
     path('search_results/', search.views.search_results, name='search_results'),
     path('rates/', views.rates, name='rates'),
     path('rates/<str:field>/<str:sort_by>/', views.get_rates_by_criteria, name='rates_by_criteria'),
