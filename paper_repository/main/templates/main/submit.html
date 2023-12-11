@@ -22,35 +22,45 @@
                 <div class="card-body">
                     <div class="row g-3">
                         <div class="col-md-12 mb-3">
-                            <label for="{{ form.title.id_for_label }}" class="form-label">Title</label>
-                            <input type="text" class="form-control" id="{{ form.title.id_for_label }}" name="{{ form.title.html_name }}" placeholder="Enter title">
+                            <label for="title" class="form-label">Title</label>
+                            {{ form.title }}
                         </div>
-        
+                        
                         <div class="col-md-12 mb-3">
-                            <label for="{{ form.authors.id_for_label }}" class="form-label">Authors</label>
-                            <input type="text" class="form-control" id="{{ form.authors.id_for_label }}" name="{{ form.authors.html_name }}" placeholder="Enter authors">
+                            <label for="field" class="form-label">Field</label>
+                            {{ form.field }}
+                        </div>
+
+                        <div class="col-md-12 mb-3">
+                            <label for="authors" class="form-label">Authors</label>
+                            {{ form.authors }}
                         </div>
         
                         <div class="col-12 mb-3">
-                            <label for="{{ form.abstract.id_for_label }}" class="form-label">Abstract</label>
-                            <textarea class="form-control" id="{{ form.abstract.id_for_label }}" name="{{ form.abstract.html_name }}" rows="3"></textarea>
+                            <label for="abstract" class="form-label">Abstract</label>
+                            {{ form.content }}
                         </div>
         
                         <div class="col-12 mb-3">
-                            <label for="{{ form.publication_date.id_for_label }}" class="form-label">Publication Date</label>
-                            <input type="date" class="form-control" id="{{ form.publication_date.id_for_label }}" name="{{ form.publication_date.html_name }}">
+                            <label for="publication date" class="form-label">Publication Date</label>
+                            {{ form.publication_date }}
                         </div>
                         
                         <div class="col-12 mb-3">
-                            <label for="{{ form.pdf_file.id_for_label }}" class="form-label">PDF File</label>
-                            <input type="file" class="form-control-file" id="{{ form.pdf_file.id_for_label }}" name="{{ form.pdf_file.html_name }}" accept=".pdf">
+                            <label for="pdf file" class="form-label">PDF File</label>
+                            {{ form.pdf_file }}
                         </div>
                     </div>
                 </div>
-        
+                
                 <div class="card-footer">
                     <button class="btn btn-primary" type="submit">Submit Paper</button>
                 </div>
+                {% if form.errors %}
+                    <div class="alert alert-danger">
+                        <strong>Error:</strong> Please correct the errors below.
+                    </div>
+                {% endif %}
             </div>
         </form>                
     </div>

@@ -1,5 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Articles
+from .forms import ArticleForm
 from django.db.models import Max
 from django.http import HttpResponseNotFound
 
@@ -22,7 +23,19 @@ def rates(request):
 
 
 def submit(request):
-    return render(request, 'main/submit.html')
+    error = ''
+    if request.method == 'POST':
+        form = ArticleForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+        else:
+            error = 'Form is incorrect'
+     
+    form = ArticleForm()
+    data = {"form":form, "error":error}       
+     
+    return render(request, 'main/submit.html', data)
 
 
 def get_rates_by_criteria(request, field, sort_by):
