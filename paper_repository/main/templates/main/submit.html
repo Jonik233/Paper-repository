@@ -65,4 +65,51 @@
         </form>                
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let socket = new WebSocket('ws://localhost:8000/ws/submit/');
+        
+        socket.onopen = function(e) {
+            console.log("WebSocket connection established");
+            
+        };
+    
+        socket.onmessage = function(event) {
+            console.log('Message from server: ', event.data);
+        };
+    
+        socket.onerror = function(error) {
+            // Handle any errors that occur during the connection
+            console.error("WebSocket Error: " + error);
+        };
+    
+        socket.onclose = function(event) {
+            // Handle the WebSocket connection closing
+            console.log("WebSocket closed: ", event);
+        };
+
+        const form = document.querySelector('.form');  // Adjust if you have a specific class or ID for your form
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();  // Prevent the default form submission
+
+            // Collect the form data
+            const formData = new FormData(form);
+            const articleData = {};
+            formData.forEach((value, key) => {
+                articleData[key] = value;
+            });
+
+            // Send the form data over the WebSocket
+            socket.send(JSON.stringify({
+                action: 'new_article',
+                article: articleData
+            }));
+            
+            form.submit();
+        });
+    });
+    
+</script>
+
 {% endblock %}

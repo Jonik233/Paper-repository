@@ -24,18 +24,22 @@ def rates(request):
 
 def submit(request):
     error = ''
+    article_id = None
+
     if request.method == 'POST':
         form = ArticleForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            article = form.save()
+            article_id = article.id
             return redirect('home')
         else:
             error = 'Form is incorrect'
-     
+
     form = ArticleForm()
-    data = {"form":form, "error":error}       
-     
+    data = {"form": form, "error": error, "article_id": article_id}
+
     return render(request, 'main/submit.html', data)
+
 
 
 def get_rates_by_criteria(request, field, sort_by):
