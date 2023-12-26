@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'main',
+    'channels',
     'registration',
     'search',
     'django.contrib.admin',
@@ -72,7 +73,18 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'paper_repository.wsgi.application'
+ASGI_APPLICATION = 'paper_repository.asgi.application'
 
+
+# Configure channel layer
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases

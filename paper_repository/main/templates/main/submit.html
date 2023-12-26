@@ -65,4 +65,31 @@
         </form>                
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let socket = new WebSocket('ws://localhost:8000/ws/submit/');
+    
+        socket.onopen = function(e) {
+            console.log("WebSocket connection established");
+            console.log("Hello");
+        };
+    
+        socket.onmessage = function(event) {
+            // Handle any messages received from the server here
+            console.log('Message from server: ', event.data);
+        };
+    
+        socket.onerror = function(error) {
+            // Handle any errors that occur during the connection
+            console.error("WebSocket Error: " + error);
+        };
+    
+        socket.onclose = function(event) {
+            // Handle the WebSocket connection closing
+            console.log("WebSocket closed: ", event);
+        };
+    });
+</script>
+
 {% endblock %}
