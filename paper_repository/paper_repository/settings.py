@@ -144,3 +144,18 @@ MEDIA_URL = '/papers/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Email backend setting (default is SMTP)
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# Host and port
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587  # Use 465 for SSL
+
+# Host user and password
+EMAIL_HOST_USER = 'vmashtaler5@gmail.com'  # Your Gmail address
+EMAIL_HOST_PASSWORD = 'uoar bgsx mqki hxjh'  # Your Gmail password or app password
+
+# Use TLS encryption
+EMAIL_USE_TLS = True
