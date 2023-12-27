@@ -4,6 +4,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
+
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, full_name, institution, password=None):
         if not email:
@@ -29,15 +30,20 @@ class CustomUserManager(BaseUserManager):
             password=password,
         )
         user.is_admin = True
+        user.is_staff = True
         user.save(using=self._db)
         return user
+
+
 class CustomUser(AbstractBaseUser):
     email = models.EmailField(_("email address"), unique=True)
     full_name = models.CharField(_("full name"), max_length=150)
     institution = models.CharField(_("institution"), max_length=150)
     is_admin = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     USERNAME_FIELD = "email"
+    EMAIL_FIELD = "email"
     REQUIRED_FIELDS = ["full_name", "institution"]
 
     objects = CustomUserManager()
@@ -47,3 +53,10 @@ class CustomUser(AbstractBaseUser):
 
     def has_perm(self, perm, obj=None):
         return self.is_admin
+
+    def has_module_perms(self, app_label):
+        return True
+
+    def clean(self):
+        super().clean()
+        self.email = self.__class__.objects.normalize_email(self.email)
