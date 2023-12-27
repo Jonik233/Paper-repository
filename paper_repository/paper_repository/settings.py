@@ -32,7 +32,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'main',
-    'channels',
     'registration',
     'search',
     'django.contrib.admin',
@@ -145,6 +144,8 @@ MEDIA_URL = '/papers/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'registration.CustomUser'
 
 # Email backend setting (default is SMTP)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

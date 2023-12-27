@@ -3,6 +3,7 @@ from .models import Articles
 from .forms import ArticleForm
 from django.db.models import Max
 from django.http import HttpResponseNotFound
+from django.contrib.auth import logout
 
 
 def home(request):
@@ -17,6 +18,10 @@ def home(request):
                        
     return render(request, 'main/home.html', {"articles": top_articles})
 
+
+def logout_current_user(request):
+    logout(request)
+    return redirect('home')
 
 def rates(request):
     return render(request, 'main/rates.html')

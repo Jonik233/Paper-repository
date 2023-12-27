@@ -15,35 +15,35 @@
             <h3>Registration Form</h3>
           </div>
           <div class="card-body">
-            <form>
-
+            <form method="POST">
+              {% csrf_token %}
               <div class="form-group">
                 <label for="fullName">Full Name</label>
-                <input type="text" class="form-control" id="fullName" placeholder="Enter your full name" required>
+                <input type="text" class="form-control" id="fullName" name="full_name" value="" placeholder="Enter your full name" required>
               </div>
 
               <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                <input type="email" class="form-control" id="email" placeholder="Enter your email" name="email" value="" required>
               </div>
 
               <div class="form-group">
                 <label for="institution">Institution</label>
-                <input type="text" class="form-control" id="institution" placeholder="Enter your institution name" required>
+                <input type="text" class="form-control" id="institution" name="institution" value="" placeholder="Enter your institution name" required>
               </div>
 
               <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Create a password" required>
+                <input type="password" class="form-control" id="password" name="password" value="" placeholder="Create a password" required>
               </div>
 
               <div class="form-group">
-                <label for="password">Confirm password</label>
-                <input type="password" class="form-control" id="password" placeholder="Create a password" required>
+                <label for="confirm_password">Confirm password</label>
+                <input type="password" class="form-control" id="confirm_password" name="confirm_password" value="" placeholder="Confirm a password" required>
               </div>
 
               <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block">Register</button>
+                <button type="submit" class="btn btn-primary btn-block" disabled>Register</button>
               </div>
 
               <div class="text-center mt-4">
@@ -59,5 +59,84 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script>
+      formFields = document.querySelectorAll('.form-control');
+        formFields.forEach(function(field) {
+            field.addEventListener('input', validateFields);
+        });
+
+      function validateFields(event) {
+        if (!checkIfEmpty(event) && checkIfEmailValid(event) && checkIfPasswordValid(event) && checkPasswordMatch(event)) {
+            button = document.querySelector('button[type="submit"]');
+            button.disabled = false;
+            return;
+        }
+        button = document.querySelector('button[type="submit"]');
+        button.disabled = true;
+      }
+
+      function checkIfEmpty(event) {
+          fields = document.querySelectorAll('.form-control');
+          fields.forEach(function (field) {
+              if (field.value === "" && event.target.id === field.id) {
+                  field.classList.add('is-invalid');
+                  return true;
+              } else if (event.target.id === field.id) {
+                  field.classList.remove('is-invalid');
+                  return false;
+              }
+          });
+          return false;
+      }
+
+      function checkIfEmailValid(event) {
+          if (event.target.id === 'email') {
+              var email = event.target.value;
+              if (validateEmail(email)) {
+                  event.target.classList.remove('is-invalid');
+                  return true;
+              } else {
+                  event.target.classList.add('is-invalid');
+                  return false;
+              }
+          }
+          return true;
+      }
+
+      const validateEmail = (email) => {
+      return String(email)
+          .toLowerCase()
+          .match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+      }
+
+      function checkIfPasswordValid(event) {
+          var password = document.getElementById('password').value;
+          if (event.target.id === 'password') {
+              if (password.length < 8) {
+                  document.getElementById('password').classList.add('is-invalid');
+                  return false
+              } else {
+                  document.getElementById('password').classList.remove('is-invalid');
+                  return true;
+              }
+          }
+          return true;
+      }
+
+        function checkPasswordMatch(event) {
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirm_password').value;
+            if (event.target.id === 'confirm_password') {
+                if (password !== confirmPassword) {
+                    document.getElementById('confirm_password').classList.add('is-invalid');
+                    return false;
+                } else {
+                    document.getElementById('confirm_password').classList.remove('is-invalid');
+                    return true;
+                }
+            }
+            return true;
+        }
+  </script>
 </body>
 </html>
