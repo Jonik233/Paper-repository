@@ -5,6 +5,7 @@ from asgiref.sync import sync_to_async
 from .models import Articles
 
 class MyAsyncConsumer(AsyncWebsocketConsumer):
+
     async def connect(self):
         await self.accept()
 
@@ -18,9 +19,7 @@ class MyAsyncConsumer(AsyncWebsocketConsumer):
         if action == 'new_article':
             # Extract article details
             article_data = text_data_json.get('article')
-            # Create a new article in the database
             await self.create_article(article_data)
-            # Send an email notification about the new article
             await self.send_email(article_data['title'])
 
     @sync_to_async
